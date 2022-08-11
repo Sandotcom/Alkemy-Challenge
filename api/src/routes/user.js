@@ -4,6 +4,6 @@ import middleware from "../middleware/index.js";
 
 const router = Router();
 
-router.get('/user', middleware, getUser)
+router.get('/', middleware, getUser)
 
 export default router;

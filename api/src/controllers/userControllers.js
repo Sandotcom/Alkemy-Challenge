@@ -6,7 +6,7 @@ export const getUser = async (req, res) => {
 
     const userData = await User.findByPk(id);
 
-    if(userData) return res.status(200).send(userData)
+    return res.status(200).send(userData)
   } catch (error) {
     console.log(error)
   }
