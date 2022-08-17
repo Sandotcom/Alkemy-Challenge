@@ -5,7 +5,7 @@
   left:0;
   bottom:0;
   right:0;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 300;
   color: #000;
   display: flex;
@@ -17,6 +17,15 @@
   padding: 0 20px;
 }
 
-.links{
+.links img{
   float: right;
+  width: 25px;
+  height: 25px;
+  margin-right: 20px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.links img:hover{
+  transform: scale(1.2);
 }
