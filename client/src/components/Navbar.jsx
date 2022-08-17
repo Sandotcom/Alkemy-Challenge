@@ -1,7 +1,7 @@
 import React from 'react'
 import style from '../styles/Navbar.module.css'
 
-export const Navbar = () => {
+const Navbar = () => {
   return (
     <nav className={style.container}>
       <h2>Finance App</h2>
@@ -9,3 +9,5 @@ export const Navbar = () => {
     </nav>
   )
 }
+
+export default Navbar
