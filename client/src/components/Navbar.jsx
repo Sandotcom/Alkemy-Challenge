@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className={style.container}>
       <h2>Finance App</h2>
-      <button>Iniciar sesión</button>
+      <button className={style.btn}>Iniciar sesión</button>
     </nav>
   )
 }
