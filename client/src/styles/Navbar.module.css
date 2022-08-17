@@ -1,0 +1,33 @@
+.container{
+  background: #22223B;
+  height: 80px;
+  width: 100vw;
+  color: #F1FAEE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.container h2{
+  line-height: 80px;
+  font-weight: 600;
+  padding: 0 20px;
+}
+
+.container button{
+  color: #F1FAEE;
+  float: right;
+  margin-right: 20px;
+  font-weight: 300;
+  font-size: 18px;
+  padding: 15px 15px;
+  background-color: transparent;
+  border: 1px solid #4A4E69;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+}
+
+.container button:hover, button:active{
+  background-color: #4A4E69;
+}
