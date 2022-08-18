@@ -1,11 +1,36 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux'
 import finance from "../assets/finance_app.svg";
 import style from "../styles/Form.module.css";
+import { signIn, signUp } from "../app/actions";
+import { useNavigate } from "react-router-dom";
+
+const initialState = { name: '', email: '', password: '', confirmPassword: ''}
 
 const Form = () => {
   const [isUser, setIsUser] = useState(true);
+  const [input, setInput] = useState(initialState)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleUser = () => setIsUser((prevIsUser) => !prevIsUser);
+
+  const handleSubmit = () => {
+    console.log(input)
+  }
+
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value})
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    if(isUser){
+      dispatch(signIn(input, navigate))
+    } else {
+      dispatch(signUp(input, navigate))
+    }
+  }
 
   return (
     <div className={style.main}>
@@ -14,29 +39,29 @@ const Form = () => {
           <img className={style.img} src={finance} alt="Finance App" />
         </figure>
 
-        <form className={style.form}>
+        <form onSubmit={handleSubmit} className={style.form}>
           <h2>{isUser ? "Iniciar sesión" : "Registrate"}</h2>
           {!isUser && (
             <input 
-              className={style.input} type="text" placeholder="Nombre" autoComplete="given-name"
+              name='name' onChange={handleChange} className={style.input} type="text" placeholder="Nombre" autoComplete="given-name"
             />
           )}
 
           <input
-            className={style.input} type="email" placeholder="Email" autoComplete="email"
+            name='email' onChange={handleChange} className={style.input} type="email" placeholder="Email" autoComplete="email"
           />
 
           <input
-            className={style.input} type="password" placeholder="Contraseña" autoComplete={isUser ? "current-password" : "new-password"}
+            name='password' onChange={handleChange} className={style.input} type="password" placeholder="Contraseña" autoComplete={isUser ? "current-password" : "new-password"}
           />
 
           {!isUser && (
             <input
-              className={style.input} type="password" placeholder="Confirmar contraseña" autoComplete="new-password"
+            name='confirmPassword' onChange={handleChange} className={style.input} type="password" placeholder="Confirmar contraseña" autoComplete="new-password"
             />
           )}
 
-          <button className={style.btn} type="submit">
+          <button onClick={handleClick} className={style.btn} type="submit">
             {isUser ? "Iniciar sesión" : "Registrate"}
           </button>
 

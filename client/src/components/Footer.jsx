@@ -5,7 +5,7 @@ import github from '../assets/github.svg'
 
 const Footer = () => {
   return (
-    <div className={style.footer}>
+    <footer className={style.footer}>
       <p>Creado por Santiago Trabucco</p>
       <div className={style.links}>
         <a href='https://github.com/Sandotcom' target="_blank" rel="noreferrer noopener">
@@ -15,7 +15,7 @@ const Footer = () => {
           <img src={linkedin} alt='linkedin' />
         </a>
       </div>
-    </div>
+    </footer>
   )
 }
 

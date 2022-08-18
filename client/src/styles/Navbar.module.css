@@ -9,10 +9,12 @@
   position: relative;
 }
 
-.container h2{
+.h2{
   line-height: 80px;
   font-weight: 600;
   padding: 0 20px;
+  color: #F1FAEE;
+  text-decoration: none;
 }
 
 .btn{
