@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
 import finance from "../assets/finance_app.svg";
-import style from "../styles/Form.module.css";
+import style from "../styles/AuthForm.module.css";
 import { signIn, signUp } from "../app/actions";
 import { useNavigate } from "react-router-dom";
 
 const initialState = { name: '', email: '', password: '', confirmPassword: ''}
 
-const Form = () => {
+const AuthForm = () => {
   const [isUser, setIsUser] = useState(true);
   const [input, setInput] = useState(initialState)
   const dispatch = useDispatch()
@@ -76,4 +76,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default AuthForm;

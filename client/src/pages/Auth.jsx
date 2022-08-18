@@ -1,10 +1,10 @@
 import React from 'react'
-import Form from '../components/Form'
+import AuthForm from '../components/AuthForm'
 
 const Auth = () => {
   return (
     <>
-      <Form />
+      <AuthForm />
     </>
   )
 }
