@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
-import Dashboard from './pages/Dashboard'
+import ABM from './pages/ABM'
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route exact path='/auth' element={<Auth />} />
-      <Route exact path='/dashboard' element={<Dashboard />} />
+      <Route exact path='/abm' element={<ABM />} />
     </Routes>
     </>
   )

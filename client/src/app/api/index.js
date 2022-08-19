@@ -14,3 +14,6 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (userData) => API.post(`/signIn`, userData)
 export const signUp = (userData) => API.post(`/signup`, userData)
+
+export const newTransaction = (transaction) => API.post('/transaction', transaction)
+export const getTransactions = () => API.get('/transaction')
