@@ -22,7 +22,7 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: false
   }
-})
+}, { timestamps: false })
 
 User.hasMany(Transaction)
 Transaction.belongsTo(User)

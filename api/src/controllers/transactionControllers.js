@@ -17,9 +17,26 @@ export const getTransactions = async (req, res) => {
   const userId = req.userId
   
   try {
-    const userTransactions = await Transaction.findAll({ where: { userId }});
+    const userTransactions = await Transaction.findAll({ 
+      where: { userId },
+      order: [['createdAt', 'DESC']],
+    });
+    
+    let balance = 0;
+    let incomes = 0;
+    let outcomes = 0;
 
-    res.status(200).send(userTransactions)
+    userTransactions.map((e) => {
+      if(e.type === 'Ingreso') {
+        balance += e.value
+        incomes += e.value
+      } else {
+        balance -= e.value
+        outcomes += e.value
+      }
+    })
+
+    res.status(200).send({ transactions: userTransactions, balance: { total: balance, ingresos: incomes, egresos: outcomes}})
   } catch (error) {
     res.status(401).json({ message: "Error retrieving transactions." })
   }
