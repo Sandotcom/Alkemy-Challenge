@@ -1,21 +1,24 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransactions } from '../app/actions'
+import Dashboard from '../components/Dashboard'
 
 const Home = () => {
-  const transactions = useSelector(state => state.transactions)
   const user = JSON.parse(localStorage.getItem('profile'))
+  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
   
   useEffect(() => {
     if(user){
       dispatch(getTransactions())
     }
-  }, [user])
-  
+  }, [auth])
+ 
   if(user) {
     return (
-      <div><h2>{user.result.id}</h2></div>
+      <>
+        <Dashboard />
+      </>
     )
   } else {
     return (

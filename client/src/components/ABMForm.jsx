@@ -47,7 +47,7 @@ const ABMForm = () => {
           <h2>Nueva transación</h2>
       
           <input
-            name='concept' onChange={handleChange} className={style.input} type="text" placeholder="Concepto"
+            name='concept' onChange={handleChange} className={style.input} type="text" placeholder="Concepto" autoComplete='off'
           />
 
           <input
