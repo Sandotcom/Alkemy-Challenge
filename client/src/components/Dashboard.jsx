@@ -10,8 +10,9 @@ const Dashboard = ({ setIsModify }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleEdit = () => {
-    navigate('/abm')
+  const handleEdit = (e, id) => {
+    e.preventDefault()
+    navigate(`/edit`, { state: { id }})
   }
 
   const handleDelete = (e, id) => {
@@ -64,7 +65,7 @@ const Dashboard = ({ setIsModify }) => {
                   <p>{el.type}</p>
                   <p className={el.type === 'Ingreso' ? style.success : style.danger}>{el.type === 'Ingreso' ? el.value : `-${el.value}`}</p>
                   <p>{el.date}</p>
-                  <p className={style.edit} onClick={handleEdit}>Editar</p>
+                  <p onClick={(e) => handleEdit(e, el.id)} className={style.edit}>Editar</p>
                   <p onClick={(e) => handleDelete(e, el.id)} className={style.delet}>Eliminar</p>
                 </li>
               ))}

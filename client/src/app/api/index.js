@@ -17,4 +17,6 @@ export const signUp = (userData) => API.post(`/signup`, userData)
 
 export const newTransaction = (transaction) => API.post('/transaction', transaction)
 export const getTransactions = () => API.get('/transaction')
+export const getTransaction = (id) => API.get(`/transaction/${id}`)
+export const putTransaction = (id, transaction) => API.put(`/transaction/${id}`, transaction)
 export const deleteTransaction = (id) => API.delete(`/transaction/${id}`)

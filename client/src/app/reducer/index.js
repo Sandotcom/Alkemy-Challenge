@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import user from "./user";
 import auth from "./auth";
 import transactions from "./transactions";
 import balance from './balance'
+import transaction from './transaction'
 
-export default combineReducers({ user, auth, transactions, balance })
+export default combineReducers({ auth, transactions, balance, transaction })

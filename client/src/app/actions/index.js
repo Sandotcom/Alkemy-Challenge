@@ -1,4 +1,4 @@
-import { AUTH, GET_TRANSACTIONS } from './actionTypes';
+import { AUTH, GET_TRANSACTION, GET_TRANSACTIONS } from './actionTypes';
 import * as api from '../api';
 
 export const signIn = (userData, navigate) => async (dispatch) => {
@@ -21,7 +21,7 @@ export const signUp = (userData, navigate) => async (dispatch) => {
   }
 }
 
-export const newTransaction = (transaction, navigate) => async (dispatch) => {
+export const newTransaction = async (transaction, navigate) => {
   try {
     await api.newTransaction(transaction)
     navigate('/')
@@ -39,7 +39,25 @@ export const getTransactions = () => async (dispatch) => {
   }
 }
 
-export const deleteTransaction = (id, setIsModify) => async (dispatch) => {
+export const getTransaction = (id, setLoading) => async (dispatch) => {
+  try {
+    const { data } = await api.getTransaction(id)
+    dispatch({ type: GET_TRANSACTION, payload: data })
+    setLoading && setLoading(false)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const putTransaction = async (id, transaction) => {
+  try {
+    await api.putTransaction(id, transaction)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deleteTransaction = async (id, setIsModify) => {
   try {
     await api.deleteTransaction(id)
     setIsModify((prevIsModify) => !prevIsModify)

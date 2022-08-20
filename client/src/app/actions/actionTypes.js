@@ -1,4 +1,5 @@
 export const AUTH = 'AUTH'
 export const LOGOUT = 'LOGOUT'
 export const GET_TRANSACTIONS = 'GET_TRANSACTIONS'
+export const GET_TRANSACTION = 'GET_TRANSACTION'
 export const DELETE_TRANSACTION = 'DELETE_TRANSACTION'

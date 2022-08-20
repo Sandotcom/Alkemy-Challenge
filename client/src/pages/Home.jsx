@@ -16,7 +16,6 @@ const Home = () => {
     // eslint-disable-next-line
   }, [auth, isModify])
   
-  console.log('test')
   if(user) {
     return (
       <>

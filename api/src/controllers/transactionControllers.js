@@ -42,6 +42,25 @@ export const getTransactions = async (req, res) => {
   }
 }
 
+export const getTransaction = async (req, res) => {
+  const { id } = req.params
+  const userId = req.userId
+  
+  try {
+    const transaction = await Transaction.findByPk(id)
+
+    if(!transaction) return res.status(404).json({ message: 'Transaction not found.' })
+
+    if(transaction.userId === userId){
+      res.status(200).send(transaction)
+    } else {
+      res.status(403).json({ message: 'Cannot get others transactions.' })
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Error retrieving transaction" })
+  }
+}
+
 export const putTransaction = async (req, res) => {
   const { id } = req.params
   const toUpdate = req.body
@@ -53,7 +72,7 @@ export const putTransaction = async (req, res) => {
     if(!transaction) return res.status(404).json({ message: 'Transaction not found.' })
 
     if(transaction.userId === userId){
-      await Transaction.update(toUpdate, { where: { id }})
+      await transaction.update(toUpdate)
   
       const updatedInfo = await Transaction.findByPk(id)
   
