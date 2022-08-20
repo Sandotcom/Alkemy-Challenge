@@ -49,9 +49,10 @@ export const getTransaction = (id, setLoading) => async (dispatch) => {
   }
 }
 
-export const putTransaction = (id, transaction) => async (dispatch) => {
+export const putTransaction = (id, transaction, navigate) => async (dispatch) => {
   try {
     await api.putTransaction(id, transaction)
+    navigate('/')
   } catch (error) {
     console.log(error)
   }

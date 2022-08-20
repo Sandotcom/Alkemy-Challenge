@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import style from '../styles/ABMForm.module.css'
 import edit from '../assets/edit.svg'
+import { useDispatch } from 'react-redux'
+import { putTransaction } from '../app/actions'
+import { useNavigate } from 'react-router-dom'
 
 
-const EditForm = ({ concept, value, type, date }) => {
+const EditForm = ({ id, concept, value, type, date }) => {
   const [input, setInput] = useState({ concept, value, date })
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   const handleChange = (e) => {
     setInput({
@@ -20,7 +25,7 @@ const EditForm = ({ concept, value, type, date }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // dispatch(newTransaction(input, navigate))
+    dispatch(putTransaction(id, input, navigate))
   }
   
   return (

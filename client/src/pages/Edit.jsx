@@ -23,7 +23,7 @@ const Edit = () => {
     )
   } else return (
     <>
-      <EditForm concept={concept} value={value} type={type} date={date} />
+      <EditForm id={state.id} concept={concept} value={value} type={type} date={date} />
     </>
   )
 }
