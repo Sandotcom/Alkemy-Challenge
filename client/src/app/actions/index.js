@@ -21,7 +21,7 @@ export const signUp = (userData, navigate) => async (dispatch) => {
   }
 }
 
-export const newTransaction = async (transaction, navigate) => {
+export const newTransaction = (transaction, navigate) => async (dispatch) => {
   try {
     await api.newTransaction(transaction)
     navigate('/')
@@ -49,7 +49,7 @@ export const getTransaction = (id, setLoading) => async (dispatch) => {
   }
 }
 
-export const putTransaction = async (id, transaction) => {
+export const putTransaction = (id, transaction) => async (dispatch) => {
   try {
     await api.putTransaction(id, transaction)
   } catch (error) {
@@ -57,7 +57,7 @@ export const putTransaction = async (id, transaction) => {
   }
 }
 
-export const deleteTransaction = async (id, setIsModify) => {
+export const deleteTransaction = (id, setIsModify) => async (dispatch) => {
   try {
     await api.deleteTransaction(id)
     setIsModify((prevIsModify) => !prevIsModify)
