@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransactions } from '../app/actions'
 import Dashboard from '../components/Dashboard'
@@ -6,18 +6,21 @@ import Dashboard from '../components/Dashboard'
 const Home = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
   const auth = useSelector(state => state.auth)
+  const [isModify, setIsModify] = useState(false)
   const dispatch = useDispatch()
   
   useEffect(() => {
     if(user){
       dispatch(getTransactions())
     }
-  }, [auth])
- 
+    // eslint-disable-next-line
+  }, [auth, isModify])
+  
+  console.log('test')
   if(user) {
     return (
       <>
-        <Dashboard />
+        <Dashboard setIsModify={setIsModify} />
       </>
     )
   } else {

@@ -71,18 +71,50 @@
   width: 90%;
   margin: auto;
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.6rem;
 }
 
-.data td{
-  font-size: 15px;
-  height: 2rem;
+.data{
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.6rem;
   border-bottom: 1px solid #C9ADA7;
+  margin-top: 1rem;
+}
+
+.data p{
+  font-size: 15px;
 }
 
 .danger{
   color: rgb(197, 70, 70);
+  font-weight: 500;
 }
 
 .success{
   color: rgb(20, 136, 20);
+  font-weight: 500;
+}
+
+.edit{
+  font-weight: 500;
+}
+
+.edit:hover{
+  cursor: pointer;
+  color: rgb(20, 136, 20);
+}
+
+.delet{
+  font-weight: 500;
+}
+
+.delet:hover{
+  cursor: pointer;
+  color: rgb(197, 70, 70);
 }

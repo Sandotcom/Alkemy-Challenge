@@ -1,4 +1,4 @@
-import { AUTH, GET_TRANSACTIONS, NEW_TRANSACTION } from './actionTypes';
+import { AUTH, GET_TRANSACTIONS } from './actionTypes';
 import * as api from '../api';
 
 export const signIn = (userData, navigate) => async (dispatch) => {
@@ -34,6 +34,15 @@ export const getTransactions = () => async (dispatch) => {
   try {
     const { data } = await api.getTransactions()
     dispatch({ type: GET_TRANSACTIONS, payload: data })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deleteTransaction = (id, setIsModify) => async (dispatch) => {
+  try {
+    await api.deleteTransaction(id)
+    setIsModify((prevIsModify) => !prevIsModify)
   } catch (error) {
     console.log(error)
   }

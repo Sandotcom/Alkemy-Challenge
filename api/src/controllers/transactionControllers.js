@@ -76,7 +76,7 @@ export const deleteTransaction = async (req, res) => {
     if(!transaction) return res.status(404).json({ message: 'Transaction not found.' })
 
     if(transaction.userId === userId){
-      await Transaction.destroy({ where: { id }})
+      await transaction.destroy()
 
       res.status(200).json({ message: 'Deleted successfully' })
     } else {
