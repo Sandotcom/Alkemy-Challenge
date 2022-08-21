@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import finance from "../assets/finance_app.svg";
+import svg from "../assets/authentication.svg";
 import style from "../styles/AuthForm.module.css";
 import { signIn, signUp } from "../app/actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const initialState = { name: '', email: '', password: '', confirmPassword: ''}
 
 const AuthForm = () => {
-  const [isUser, setIsUser] = useState(true);
+  const { state } = useLocation()
+  const [isUser, setIsUser] = useState(state === null ? false : true);
   const [input, setInput] = useState(initialState)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleUser = () => setIsUser((prevIsUser) => !prevIsUser);
-
-  const handleSubmit = () => {
-    console.log(input)
-  }
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value})
@@ -36,10 +33,10 @@ const AuthForm = () => {
     <div className={style.main}>
       <div className={style.container}>
         <figure className={style.figure}>
-          <img className={style.img} src={finance} alt="Finance App" />
+          <img className={style.img} src={svg} alt="Finance App" />
         </figure>
 
-        <form onSubmit={handleSubmit} className={style.form}>
+        <form className={style.form}>
           <h2>{isUser ? "Iniciar sesión" : "Registrate"}</h2>
           {!isUser && (
             <input 

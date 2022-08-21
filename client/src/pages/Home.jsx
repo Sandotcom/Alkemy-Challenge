@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransactions } from '../app/actions'
 import Dashboard from '../components/Dashboard'
+import Landing from '../components/Landing'
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -24,7 +25,9 @@ const Home = () => {
     )
   } else {
     return (
-    <div>Home</div>
+    <>
+      <Landing />
+    </>
   )
   }
 }

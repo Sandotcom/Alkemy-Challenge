@@ -10,7 +10,6 @@ const Navbar = () => {
   const location = useLocation()
 
   useEffect(() => {
-    const token = user?.token;
     setUser(JSON.parse(localStorage.getItem('profile')))
     // eslint-disable-next-line
   }, [location])
@@ -27,7 +26,7 @@ const Navbar = () => {
       
       {user ? 
         (<button className={style.btn} onClick={logout}>Cerrar sesión</button>)
-        : (<Link to='/auth'><button className={style.btn}>Iniciar sesión</button></Link>)}
+        : (<Link to='/auth' state={true}><button className={style.btn}>Iniciar sesión</button></Link>)}
     </nav>
   )
 }
