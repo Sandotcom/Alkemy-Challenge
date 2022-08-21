@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux'
 import svg from "../assets/authentication.svg";
 import style from "../styles/AuthForm.module.css";
@@ -9,10 +9,14 @@ const initialState = { name: '', email: '', password: '', confirmPassword: ''}
 
 const AuthForm = () => {
   const { state } = useLocation()
-  const [isUser, setIsUser] = useState(state === null ? false : true);
+  const [isUser, setIsUser] = useState(true);
   const [input, setInput] = useState(initialState)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    state === null && setIsUser(false)
+  }, [])
 
   const handleUser = () => setIsUser((prevIsUser) => !prevIsUser);
 
