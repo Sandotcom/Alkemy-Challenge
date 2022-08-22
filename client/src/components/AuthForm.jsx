@@ -9,12 +9,12 @@ import { validateName, validateEmail, validatePassword, validateConfirmPassword,
 const initialState = { name: '', email: '', password: '', confirmPassword: ''}
 
 const AuthForm = () => {
-  const { state } = useLocation()
   const [isUser, setIsUser] = useState(true);
   const [input, setInput] = useState(initialState)
   const [error, setError] = useState({})
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { state } = useLocation()
 
   useEffect(() => {
     state === null && setIsUser(false)
@@ -78,8 +78,9 @@ const AuthForm = () => {
     }
   }
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
+
     if(isUser){
       let hasError = validateSignIn(input)
       setError(hasError)
@@ -87,10 +88,6 @@ const AuthForm = () => {
       let hasError = validateSignUp(input)
       setError(hasError)
     }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
 
     if(Object.keys(error).length === 0){
       if(isUser){
@@ -108,38 +105,55 @@ const AuthForm = () => {
           <img className={style.img} src={svg} alt="Finance App" />
         </figure>
 
-        <form onSubmit={handleSubmit} className={style.form}>
+        <form className={style.form}>
           <h2>{isUser ? "Iniciar sesión" : "Registrate"}</h2>
+          
           {!isUser && (
-            <input 
-              name='name' onChange={handleChange} onBlur={handleNameError} className={style.input} type="text" placeholder="Nombre" autoComplete="given-name"
-            />
+            <div className={style.inputContainer}>
+              <input 
+                name='name' onChange={handleChange} onBlur={handleNameError} className={error.name ? style.inputDanger : style.input} type="text" placeholder="Nombre" autoComplete="given-name"
+              />
+              {error.name && <p className={style.pDanger}>{error.name}</p>}
+            </div>
           )}
 
+          <div className={style.inputContainer}>
           <input
-            name='email' onChange={handleChange} onBlur={handleEmailError} className={style.input} type="email" placeholder="Email" autoComplete="email"
+            name='email' onChange={handleChange} onBlur={handleEmailError} className={error.email ? style.inputDanger : style.input} type="email" placeholder="Email" autoComplete="email"
           />
-
+          {error.email && <p className={style.pDanger}>{error.email}</p>}
+          </div>
+          
+          <div className={style.inputContainer}>
           <input
-            name='password' onChange={handleChange} onBlur={handlePasswordError} className={style.input} type="password" placeholder="Contraseña" autoComplete={isUser ? "current-password" : "new-password"}
+            name='password' onChange={handleChange} onBlur={handlePasswordError} className={error.password ? style.inputDanger : style.input} type="password" placeholder="Contraseña" autoComplete={isUser ? "current-password" : "new-password"}
           />
+          {error.password && <p className={style.pDanger}>{error.password}</p>}
+          </div>
 
           {!isUser && (
-            <input
-            name='confirmPassword' onChange={handleChange} onBlur={handleConfirmPasswordError} className={style.input} type="password" placeholder="Confirmar contraseña" autoComplete="new-password"
-            />
+            <div className={style.inputContainer}>
+              <input
+              name='confirmPassword' onChange={handleChange} onBlur={handleConfirmPasswordError} className={error.confirmPassword ? style.inputDanger : style.input} type="password" placeholder="Confirmar contraseña" autoComplete="new-password"
+              />
+            {error.confirmPassword && <p className={style.pDanger}>{error.confirmPassword}</p>}
+            </div>
           )}
 
-          <button onClick={handleClick} className={style.btn} type="submit">
-            {isUser ? "Iniciar sesión" : "Registrate"}
-          </button>
 
           <p className={style.p} onClick={handleUser}>
             {isUser
               ? "¿No tenés cuenta? ¡Registrate!"
               : "¿Ya tenés cuenta? Inicía sesión"}
           </p>
+          
+
+          <button type="submit" onClick={handleSubmit} className={style.btn} 
+            disabled={input === initialState || !input.password || !input.email || (!isUser && !input.name) || (!isUser && !input.confirmPassword) || error.email || error.password || (!isUser && error.name) || (!isUser && error.confirmPassword)}>
+            {isUser ? "Iniciar sesión" : "Registrate"}
+          </button>
         </form>
+
       </div>
     </div>
   );

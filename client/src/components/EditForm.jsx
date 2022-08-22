@@ -4,10 +4,11 @@ import edit from '../assets/edit.svg'
 import { useDispatch } from 'react-redux'
 import { putTransaction } from '../app/actions'
 import { useNavigate } from 'react-router-dom'
-
+import { validateConcept, validateValue, validateDate, validateTransaction  } from './validateForm'
 
 const EditForm = ({ id, concept, value, type, date }) => {
   const [input, setInput] = useState({ concept, value, date })
+  const [error, setError] = useState({})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
@@ -23,9 +24,54 @@ const EditForm = ({ id, concept, value, type, date }) => {
     })
   }
 
+  const handleConceptError = (e) => {
+    let hasError = validateConcept({...input, [e.target.name]: e.target.value})
+    if(hasError !== undefined){
+      setError({
+        ...error,
+        concept: hasError
+      })
+    } else {
+      delete error.concept
+      setError({...error})
+    }
+  }
+
+  const handleValueError = (e) => {
+    let hasError = validateValue({...input, [e.target.name]: e.target.value})
+    if(hasError !== undefined){
+      setError({
+        ...error,
+        value: hasError
+      })
+    } else {
+      delete error.value
+      setError({...error})
+    }
+  }
+
+  const handleDateError = (e) => {
+    let hasError = validateDate({...input, [e.target.name]: e.target.value})
+    if(hasError !== undefined){
+      setError({
+        ...error,
+        date: hasError
+      })
+    } else {
+      delete error.date
+      setError({...error})
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(putTransaction(id, input, navigate))
+    
+    let hasError = validateTransaction(input)
+    setError(hasError)
+
+    if(Object.keys(error).length === 0){
+      dispatch(putTransaction(id, input, navigate))
+    }
   }
   
   return (
@@ -35,24 +81,38 @@ const EditForm = ({ id, concept, value, type, date }) => {
           <img className={style.img} src={edit} alt="Edit" />
         </figure>
 
-        <form onSubmit={handleSubmit} className={style.form}>
+        <form className={style.form}>
           <h2>Editar transación</h2>
-      
-          <input
-            name='concept' value={input.concept} onChange={handleChange} className={style.input} type="text" autoComplete='off'
-          />
 
-          <input
-            name='value' value={input.value} onChange={handleValue} className={style.input} type="number" placeholder="Valor"
-          />
-          
-          <input className={style.inputDisabled} type='text' value={type} disabled />
+          <div className={style.inputContainer}>
+            <input
+              name='concept' value={input.concept} onChange={handleChange} onBlur={handleConceptError} className={error.concept ? style.inputDanger : style.input} type="text" autoComplete='off'
+            />
+            {error.concept && <p className={style.pDanger}>{error.concept}</p>}
+          </div>
 
-          <input
-            name='date' value={input.date} onChange={handleChange} className={style.input} type="date" placeholder="Fecha"
-          />
+          <div className={style.inputContainer}>
+            <input
+              name='value' value={input.value} onChange={handleValue} onBlur={handleValueError} className={error.value ? style.inputDanger : style.input} type="number" placeholder="Valor"
+            />
+            {error.value && <p className={style.pDanger}>{error.value}</p>}
+          </div>
+
+          <div className={style.inputContainer}>
+            <input className={style.inputDisabled} type='text' value={type} disabled />
+          </div>
+
+          <div className={style.inputContainer}>
+            <input
+              name='date' value={input.date} onChange={handleChange} onBlur={handleDateError} className={error.date ? style.inputDanger : style.input} type="date" placeholder="Fecha"
+              />
+              {error.date && <p className={style.pDanger}>{error.date}</p>}
+          </div>
           
-          <button className={style.btn} type='submit'>Editar</button>
+          <button className={style.btn} onClick={handleSubmit} type='submit'
+            disabled={!input.concept || !input.value || !input.date || error.concept || error.value || error.date}>
+            Editar
+          </button>
 
         </form>
       </div>

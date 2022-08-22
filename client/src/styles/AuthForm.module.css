@@ -42,8 +42,13 @@
   gap: 1.5em;
 }
 
-.input{
+.inputContainer{
   width: 80%;
+  max-width: 500px;
+}
+
+.input{
+  width: 100%;
   max-width: 500px;
   background-color: #F1FAEE;
   padding: .9em;
@@ -54,6 +59,15 @@
 .input:focus{
   outline: none;
   border: 1px solid #4A4E69;
+}
+
+.inputDanger{
+  width: 100%;
+  max-width: 500px;
+  background-color: #F1FAEE;
+  padding: .9em;
+  border: 1px solid #c54646;
+  font-family: inherit;
 }
 
 .btn{
@@ -71,6 +85,15 @@
 
 .btn:hover, .btn:active{
   background-color: #161627;
+}
+
+.btn:disabled{
+  background-color: #2b2b36;
+}
+
+.pDanger{
+  color: #993131;
+  padding-top: .3em;
 }
 
 .p:hover{

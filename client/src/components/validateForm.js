@@ -24,11 +24,11 @@ export const validateConfirmPassword = (input) => {
 
 export const validateConcept = (input) => {
   if(!input.concept) return 'Concepto es requerido'
-  if(!/^\w\D{3,25}$/.test(input.concept)){
+  if(!/^\w\D{1,25}$/.test(input.concept)){
     if(/^\d\w*$/.test(input.concept)) return 'El concepto no puede incluir números'
-    else if(/^\w{0,3}$/.test(input.concept)) return 'El concepto tiene que ser más grande que 3 caracteres'
+    else if(/^\w{0,1}$/.test(input.concept)) return 'El concepto tiene que ser más grande que 1 caracteres'
     else if(/^\w{25,}$/.test(input.concept)) return 'Concepto muy largo'
-    else return 'El concepto debe tener entre 3 y 25 y caracteres y no puede incluir números'
+    else return 'El concepto debe tener entre 1 y 25 y caracteres y no puede incluir números'
   }
 }
 
@@ -68,6 +68,25 @@ export const validateSignUp = (input) => {
   if(!input.password) error.password = 'Contraseña es requerida'
   if(!input.confirmPassword) error.confirmPassword = 'Por favor, confirma tu contraseña'
   if(input.password !== input.confirmPassword) error.confirmPassword = 'Las contraseñas no coinciden'
+
+  return error
+}
+
+export const validateTransaction = (input) => {
+  let error = {}
+
+  if(!input.concept) error.concept = 'Concepto es requerido'
+  if(!/^\w\D{1,25}$/.test(input.concept)){
+    if(/^\d\w*$/.test(input.concept)) error.concept = 'El concepto no puede incluir números'
+    else if(/^\w{0,1}$/.test(input.concept)) error.concept = 'El concepto tiene que ser más grande que 1 caracteres'
+    else if(/^\w{25,}$/.test(input.concept)) error.concept = 'Concepto muy largo'
+    else error.concept = 'El concepto debe tener entre 1 y 25 y caracteres y no puede incluir números'
+  }
+
+  if(!input.value) error.value = 'Valor es requerido'
+  if(!/^\d*$/.test(input.value)) error.value = 'Ingresa el valor sin puntos ni comas'
+
+  if(!input.date) error.date = 'Fecha es requerida'
 
   return error
 }

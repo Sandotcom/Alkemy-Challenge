@@ -92,12 +92,12 @@
 }
 
 .danger{
-  color: rgb(197, 70, 70);
+  color: #c54646;
   font-weight: 500;
 }
 
 .success{
-  color: rgb(20, 136, 20);
+  color: #148814;
   font-weight: 500;
 }
 
@@ -107,7 +107,7 @@
 
 .edit:hover{
   cursor: pointer;
-  color: rgb(20, 136, 20);
+  color: #148814;
 }
 
 .delet{
@@ -116,5 +116,5 @@
 
 .delet:hover{
   cursor: pointer;
-  color: rgb(197, 70, 70);
+  color: #c54646;
 }
